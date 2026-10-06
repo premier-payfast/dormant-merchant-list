@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dormant merchant outreach — 50 merchants emailed</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F6FA; --surface:#FFFFFF; --ink:#111A3D; --sub:#566079; --line:#E2E5EE;
+  --brand:#000E8F; --brand-soft:#E7E9FB; --tx:#2E9E6E; --tx-soft:#E2F4EB; --idle:#C9CEDC; --idle-ink:#6B7489;
+  --focus:#3D4FE0;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0D1330; --surface:#151C40; --ink:#EDF0FA; --sub:#A8B0C8; --line:#29315A;
+    --brand:#9AA5FF; --brand-soft:#232C63; --tx:#5CCB98; --tx-soft:#173A31; --idle:#3A4370; --idle-ink:#A8B0C8; --focus:#9AA5FF;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0D1330; --surface:#151C40; --ink:#EDF0FA; --sub:#A8B0C8; --line:#29315A;
+  --brand:#9AA5FF; --brand-soft:#232C63; --tx:#5CCB98; --tx-soft:#173A31; --idle:#3A4370; --idle-ink:#A8B0C8; --focus:#9AA5FF;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--paper);color:var(--ink);font-family:'Public Sans',system-ui,-apple-system,'Segoe UI',sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding:40px 24px 64px}
+header{display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end;border-bottom:3px solid var(--brand);padding-bottom:22px}
+.org{font-size:14px;font-weight:600;color:var(--brand)}
+h1{font-size:clamp(28px,4.4vw,44px);font-weight:800;letter-spacing:-.02em;line-height:1.08;margin-top:6px;max-width:16ch}
+.lede{color:var(--sub);margin-top:10px;max-width:60ch}
+.count{text-align:right}
+.count b{display:block;font-size:clamp(56px,9vw,96px);font-weight:800;line-height:.9;color:var(--brand);font-variant-numeric:tabular-nums;letter-spacing:-.04em}
+.count span{font-size:14px;color:var(--sub);font-weight:600}
+
+/* the 50-square strip */
+.strip-sec{margin-top:28px}
+.strip{display:grid;grid-template-columns:repeat(25,1fr);gap:5px}
+.sq{aspect-ratio:1;border-radius:4px;background:var(--idle);border:0;cursor:pointer;padding:0}
+.sq.tx{background:var(--tx)}
+.sq:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.sq.dim{opacity:.22}
+.legend{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:14px;font-size:14px;color:var(--sub)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:7px;vertical-align:-1px}
+.legend b{color:var(--ink);font-variant-numeric:tabular-nums}
+
+.tools{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:36px}
+.seg{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:3px}
+.seg button{border:0;background:transparent;color:var(--sub);font:600 14px/1 inherit;font-family:inherit;padding:9px 14px;border-radius:7px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--brand);color:#fff}
+:root[data-theme="dark"] .seg button[aria-pressed="true"]{color:#0D1330}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .seg button[aria-pressed="true"]{color:#0D1330}}
+.search{flex:1;min-width:200px;position:relative}
+.search input{width:100%;font:inherit;font-size:15px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px}
+.search input::placeholder{color:var(--sub)}
+.btn{font:600 14px/1 inherit;font-family:inherit;color:var(--brand);background:var(--brand-soft);border:0;border-radius:10px;padding:12px 16px;cursor:pointer}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+
+.table-wrap{margin-top:16px;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:720px}
+th{text-align:left;font-size:13px;font-weight:700;color:var(--sub);padding:12px 16px;border-bottom:1px solid var(--line);white-space:nowrap}
+th button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+th button::after{content:'';display:inline-block;width:0;height:0;margin-left:6px;vertical-align:2px;border:4px solid transparent}
+th[aria-sort="ascending"] button::after{border-bottom-color:currentColor;border-top-width:0}
+th[aria-sort="descending"] button::after{border-top-color:currentColor;border-bottom-width:0}
+td{padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+tr.hl td{background:var(--brand-soft)}
+td.num{font-variant-numeric:tabular-nums;color:var(--sub);white-space:nowrap}
+td.name{font-weight:600}
+td a{color:var(--brand);text-decoration:none;word-break:break-all}
+td a:hover{text-decoration:underline}
+.tag{display:inline-block;font-size:13px;font-weight:600;border-radius:6px;padding:3px 9px;white-space:nowrap}
+.tag.yes{background:var(--tx-soft);color:var(--tx)}
+.tag.no{background:var(--paper);color:var(--idle-ink)}
+.tag.sent{background:var(--brand-soft);color:var(--brand)}
+.rel{font-size:12px;color:var(--sub);display:block;font-weight:500}
+.empty{padding:40px 16px;text-align:center;color:var(--sub)}
+.foot{margin-top:18px;font-size:13px;color:var(--sub);max-width:75ch}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);font-weight:600;font-size:14px;padding:10px 16px;border-radius:10px;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.show{opacity:1}
+@media (max-width:640px){
+  header{grid-template-columns:1fr}
+  .count{text-align:left}
+  .strip{grid-template-columns:repeat(10,1fr)}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <p class="org">Premier PayFast · Customer Success</p>
+      <h1>Dormant merchant outreach</h1>
+      <p class="lede">Dormant merchants contacted by email to encourage reactivation. Every merchant on this list has been sent the outreach email.</p>
+    </div>
+    <div class="count"><b>50</b><span>merchants emailed</span></div>
+  </header>
+
+  <section class="strip-sec" aria-label="All 50 merchants at a glance">
+    <div class="strip" id="strip"></div>
+    <div class="legend">
+      <span><i style="background:var(--tx)"></i>Still transacting <b id="nTx"></b></span>
+      <span><i style="background:var(--idle)"></i>Not transacting <b id="nNo"></b></span>
+      <span>Linked to a relationship <b id="nRel"></b></span>
+    </div>
+  </section>
+
+  <div class="tools">
+    <div class="seg" role="group" aria-label="Filter by transacting status">
+      <button type="button" data-f="all" aria-pressed="true">All</button>
+      <button type="button" data-f="tx" aria-pressed="false">Still transacting</button>
+      <button type="button" data-f="no" aria-pressed="false">Not transacting</button>
+    </div>
+    <label class="search"><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Search merchants</span>
+      <input id="q" type="search" placeholder="Search by name, ID or email" autocomplete="off"></label>
+    <button class="btn" id="copy" type="button">Copy emails</button>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr>
+        <th aria-sort="none" data-k="id"><button type="button">Merchant ID</button></th>
+        <th aria-sort="none" data-k="name"><button type="button">Merchant</button></th>
+        <th aria-sort="none" data-k="email"><button type="button">Email</button></th>
+        <th aria-sort="none" data-k="tx"><button type="button">Transacting</button></th>
+        <th>Outreach</th>
+      </tr></thead>
+      <tbody id="rows"></tbody>
+    </table>
+  </div>
+  <p class="foot" id="shown"></p>
+  <p class="foot">Source: Dormant – 50 Merchants – Email Sent. None of these merchants is linked to an aggregator, so the aggregator columns are left out.</p>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+const M = [{"id": "26257", "name": "DHAKA ORGANICS", "email": "keratonehairoil@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "23989", "name": "Namal Pret", "email": "alishanmughal80@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "230130", "name": "SBMM", "email": "Moqeemawan@gmail.com", "rel": null, "tx": true, "status": "Email Sent"}, {"id": "230192", "name": "Western Wear", "email": "info@westernwearuk.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "20866", "name": "Pashmire", "email": "pashmire@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "26192", "name": "She Works", "email": "ehsan.qamar@jsbl.com", "rel": "25774", "tx": false, "status": "Email Sent"}, {"id": "24115", "name": "Hoster99", "email": "zeeshanasif470@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "26823", "name": "Techtrek", "email": "techtrekmoblies@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "25042", "name": "InfinityPACES", "email": "araza9350@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "26811", "name": "Aura Care Lab", "email": "auracareofficially@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "26091", "name": "Rybella Pakistan", "email": "iqrashoaib664@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "84047", "name": "Pakistan Data Management Services", "email": "mohsin@pakdata.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "22896", "name": "Olasites", "email": "parshantrajput3697@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "26368", "name": "F A Maalik Jeweller", "email": "contact@famaalikjeweller.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "25437", "name": "MysticBuy", "email": "mysticbuyofficial@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "24011", "name": "rewibe.shop", "email": "Teamrewibe@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "26293", "name": "Verve Salon and Spa", "email": "vervespasalon@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "23920", "name": "PAKISTAN TELECOMMUNICATION LIMITED", "email": "Shahid.Naeem@ptclgroup.com", "rel": null, "tx": true, "status": "Email Sent"}, {"id": "83650", "name": "Star Experts", "email": "starexpertsofficial@gmail.com", "rel": null, "tx": true, "status": "Email Sent"}, {"id": "20947", "name": "HLC Consultants Private Limited", "email": "hammad.latif@hlcconsultants.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "26563", "name": "Artezan Inc", "email": "artezan.inc@gmail.com", "rel": null, "tx": true, "status": "Email Sent"}, {"id": "25116", "name": "Js Brothers", "email": "junaidwada5@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "26341", "name": "Pharmacist Mentorship Platform - PMP", "email": "pharmacistmentorship@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "25799", "name": "Crystal by Ayesha", "email": "crystalbyayeshaa@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "21122", "name": "DIGISYNC TECHNOLOGIES PRIVATE LIMITED", "email": "alikhawaja83@msn.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "25142", "name": "Aliya Omar Enterprises", "email": "sohailomar3@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "24891", "name": "ORGANIZATION FOR GLOBAL POLICY AND DIALOGUE", "email": "Hamza.headway@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "22449", "name": "Flying Cart", "email": "nabeel@flyingcart.pk", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "25739", "name": "Naseem Textile", "email": "naseemtextile.international@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "83898", "name": "Rouge Blend", "email": "blendsrouge@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "24137", "name": "Glaxit", "email": "kashif@glaxit.com", "rel": null, "tx": true, "status": "Email Sent"}, {"id": "26073", "name": "Clara Vitals", "email": "claravitals.pk@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "87862", "name": "Epcot Digitizing", "email": "salmanakbar321@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "23317", "name": "Khan Brothers", "email": "maherooh.pk@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "26622", "name": "Blue Skin Care", "email": "blueskincare471@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "26561", "name": "Creatives", "email": "altamashp@yahoo.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "26760", "name": "Ross Adolphe", "email": "abbas.tahir548894@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "20732", "name": "Neoline Solution", "email": "info@neolinesolution.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "26586", "name": "Yozaf", "email": "yozaf01@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "23666", "name": "Regular Host", "email": "contact@regularhost.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "26099", "name": "Pelle Classica", "email": "pelleclassica@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "4702", "name": "Hope Hosting", "email": "hopedeveloper786@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "21781", "name": "Select Pakistan", "email": "ranaumer1994@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "70917", "name": "Injisam Private Limited", "email": "ebad@myinsijam.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "24159", "name": "SKNS.PK", "email": "sknspakistan@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "110587", "name": "Namebyt", "email": "developers@namebyt.com", "rel": null, "tx": true, "status": "Email Sent"}, {"id": "25385", "name": "Pakistan Fashion House", "email": "pakistanfashionh@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "17235", "name": "Rite Digi", "email": "shoaibishrat.87@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "83179", "name": "Retroid PK", "email": "m.bhatti149@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}, {"id": "25517", "name": "Exo", "email": "exopak19673@gmail.com", "rel": null, "tx": false, "status": "Email Sent"}];
+const $=s=>document.querySelector(s);
+let filter='all', q='', sortK=null, sortDir=1, hl=null;
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+$('#nTx').textContent=M.filter(m=>m.tx).length;
+$('#nNo').textContent=M.filter(m=>!m.tx).length;
+$('#nRel').textContent=M.filter(m=>m.rel).length;
+
+const strip=$('#strip');
+M.forEach((m,i)=>{
+  const b=document.createElement('button');
+  b.type='button'; b.className='sq'+(m.tx?' tx':'');
+  b.title=m.name+' ('+m.id+') — '+(m.tx?'still transacting':'not transacting');
+  b.setAttribute('aria-label',b.title);
+  b.onclick=()=>{hl=m.id; filter='all'; q=''; $('#q').value=''; setSeg(); render();
+    const r=document.querySelector('tr[data-id="'+m.id+'"]'); if(r) r.scrollIntoView({block:'center',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});};
+  strip.appendChild(b);
+});
+
+function visible(){
+  let L=M.filter(m=>(filter==='all'||(filter==='tx'?m.tx:!m.tx)) &&
+    (!q || (m.name+' '+m.id+' '+m.email).toLowerCase().includes(q)));
+  if(sortK){
+    L=[...L].sort((a,b)=>{
+      let x=a[sortK], y=b[sortK];
+      if(sortK==='id'){x=+x;y=+y}
+      if(sortK==='tx'){x=x?1:0;y=y?1:0}
+      if(typeof x==='string'){x=x.toLowerCase();y=y.toLowerCase()}
+      return (x>y?1:x<y?-1:0)*sortDir;
+    });
+  }
+  return L;
+}
+function render(){
+  const L=visible();
+  const ids=new Set(L.map(m=>m.id));
+  [...strip.children].forEach((b,i)=>b.classList.toggle('dim',!ids.has(M[i].id)));
+  $('#rows').innerHTML = L.length ? L.map(m=>`<tr data-id="${esc(m.id)}" class="${m.id===hl?'hl':''}">
+    <td class="num">${esc(m.id)}</td>
+    <td class="name">${esc(m.name)}${m.rel?`<span class="rel">Relationship ID ${esc(m.rel)}</span>`:''}</td>
+    <td><a href="mailto:${esc(m.email)}">${esc(m.email)}</a></td>
+    <td><span class="tag ${m.tx?'yes':'no'}">${m.tx?'Yes':'No'}</span></td>
+    <td><span class="tag sent">${esc(m.status)}</span></td></tr>`).join('')
+    : `<tr><td colspan="5" class="empty">No merchants match “${esc(q)}”. Clear the search or choose All.</td></tr>`;
+  $('#shown').textContent='Showing '+L.length+' of '+M.length+' merchants.';
+  $('#copy').textContent=L.length===M.length?'Copy all emails':'Copy '+L.length+' emails';
+  $('#copy').disabled=!L.length;
+}
+function setSeg(){document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.f===filter))}
+document.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{filter=b.dataset.f; hl=null; setSeg(); render();});
+$('#q').oninput=e=>{q=e.target.value.trim().toLowerCase(); hl=null; render();};
+document.querySelectorAll('th[data-k]').forEach(th=>th.querySelector('button').onclick=()=>{
+  const k=th.dataset.k; sortDir = sortK===k ? -sortDir : 1; sortK=k;
+  document.querySelectorAll('th[data-k]').forEach(t=>t.setAttribute('aria-sort', t===th?(sortDir===1?'ascending':'descending'):'none'));
+  render();
+});
+function toast(t){const el=$('#toast'); el.textContent=t; el.classList.add('show'); clearTimeout(toast.t); toast.t=setTimeout(()=>el.classList.remove('show'),1800);}
+$('#copy').onclick=async()=>{
+  const list=visible().map(m=>m.email).join('; ');
+  try{ await navigator.clipboard.writeText(list); toast('Copied '+visible().length+' emails'); }
+  catch(e){
+    const ta=document.createElement('textarea'); ta.value=list; document.body.appendChild(ta); ta.select();
+    let ok=false; try{ok=document.execCommand('copy')}catch(_){}
+    ta.remove(); toast(ok?'Copied '+visible().length+' emails':'Copy blocked by the browser — select emails from the table instead');
+  }
+};
+render();
+</script>
+</body>
+</html>
